@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MetaComponent } from './meta.component';
+import { MenuBarComponent } from './menu-bar.component';
 
-describe('MetaComponent', () => {
-  let component: MetaComponent;
-  let fixture: ComponentFixture<MetaComponent>;
+describe('MenuBarComponent', () => {
+  let component: MenuBarComponent;
+  let fixture: ComponentFixture<MenuBarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MetaComponent]
+      imports: [MenuBarComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(MetaComponent);
+
+    fixture = TestBed.createComponent(MenuBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,39 @@
+.page {
+  margin: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  row-gap: 20px;
+}
+
+.home-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #3B82F6;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+ul {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+ul li {
+  font-size: 1.1em;
+  line-height: 1.5;
+}

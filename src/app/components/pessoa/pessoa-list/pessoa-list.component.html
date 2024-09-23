@@ -1,0 +1,23 @@
+<app-menu-bar/>
+<h2>Lista de Pessoas</h2>
+<p-button routerLink="/pessoa-form" label="Adicionar Pessoa" />
+<p-table [value]="pessoas" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nome</th>
+      <th>CPF</th>
+      <th>E-mail</th>
+      <th>Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-pessoa>
+    <tr>
+      <td>{{ pessoa.nome }}</td>
+      <td>{{ pessoa.cpf }}</td>
+      <td>{{ pessoa.email }}</td>
+      <td>
+        <a [routerLink]="['/pessoa-view', pessoa.id]">Visualizar</a>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
