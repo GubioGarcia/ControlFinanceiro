@@ -44,11 +44,13 @@ export class MenuBarComponent implements OnInit {
           items: [
               {
                   label: 'Listar',
-                  icon: 'pi pi-list'
+                  icon: 'pi pi-list',
+                  routerLink: ['/grupo-list']
               },
               {
                   label: 'Adicionar',
-                  icon: 'pi pi-plus'
+                  icon: 'pi pi-plus',
+                  routerLink: ['/grupo-form']
               }
           ]
         },

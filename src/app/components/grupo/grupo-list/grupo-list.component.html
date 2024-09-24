@@ -1,0 +1,23 @@
+<app-menu-bar/>
+<h2>Seus Grupos</h2>
+<p-button routerLink="/grupo-form" label="Adicionar Grupo" />
+<p-table [value]="grupos" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Saldo</th>
+      <th>Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-grupo>
+    <tr>
+      <td>{{ grupo.nome }}</td>
+      <td>{{ grupo.descricao }}</td>
+      <td>{{ grupo.saldo }}</td>
+      <td>
+        <a [routerLink]="['/grupo-view', grupo.id]">Visualizar</a>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

@@ -1,0 +1,19 @@
+<app-menu-bar/>
+<h2>Adicionar Grupo</h2>
+<form (ngSubmit)="adicionarGrupo()">
+  <div class="input-container">
+    <p-floatLabel>
+      <input id="nome" type="text" pInputText [(ngModel)]="nome" name="nome" required />
+      <label for="nome">Nome</label>
+    </p-floatLabel>
+    <p-floatLabel>
+      <input id="descricao" type="text" pInputText [(ngModel)]="descricao" name="descricao" required />
+      <label for="descricao">Descricao</label>
+    </p-floatLabel>
+    <p-floatLabel>
+      <input id="saldo" type="text" pInputText [(ngModel)]="saldo" name="saldo" />
+      <label for="saldo">Saldo</label>
+    </p-floatLabel>
+  </div>
+  <button type="submit" pButton label="Adicionar Grupo"></button>
+</form>
