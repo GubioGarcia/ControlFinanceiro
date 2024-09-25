@@ -1,3 +1,4 @@
 <div class="card">
-  <p-menubar [model]="items" />
+  <p-menubar [model]="items"></p-menubar>
+  <p-selectButton [options]="temas" (ngModel)="temaSelecionado" (onChange)="changeTheme(temaSelecionado || 'bootstrap4-dark-purple')" />
 </div>
