@@ -1,6 +1,8 @@
-<app-menu-bar/>
-<h2>Lista de Pessoas</h2>
-<p-button routerLink="/pessoa-form" label="Adicionar Pessoa" />
+<app-menu-bar></app-menu-bar>
+<div class="header">
+  <h2>Lista de Pessoas</h2>
+  <p-button routerLink="/pessoa-form" label="Adicionar Pessoa"></p-button>
+</div>
 <p-table [value]="pessoas" [tableStyle]="{ 'min-width': '50rem' }">
   <ng-template pTemplate="header">
     <tr>
@@ -16,8 +18,20 @@
       <td>{{ pessoa.cpf }}</td>
       <td>{{ pessoa.email }}</td>
       <td>
-        <a [routerLink]="['/pessoa-view', pessoa.id]">Visualizar</a>
+        <button pButton type="button" label="Visualizar" class="p-button-primary button-spacing" (click)="viewPessoa(pessoa)"></button>
+        <button pButton type="button" label="Editar" class="p-button-warning p-mr-2 button-spacing" (click)="viewPessoa(pessoa)"></button>
+        <button pButton type="button" label="Deletar" class="p-button-danger" (click)="viewPessoa(pessoa)"></button>
       </td>
     </tr>
   </ng-template>
 </p-table>
+
+<!-- Visualização por Dialog -->
+<p-dialog header="Visualizar Pessoa" [(visible)]="displayDialog" modal="true" [style]="{width: '30vw'}" [closable]="true">
+  <div *ngIf="pessoaSelecionada">
+    <p><strong>ID:</strong> {{ pessoaSelecionada.id }}</p>
+    <p><strong>Nome:</strong> {{ pessoaSelecionada.nome }}</p>
+    <p><strong>CPF:</strong> {{ pessoaSelecionada.cpf }}</p>
+    <p><strong>Email:</strong> {{ pessoaSelecionada.email }}</p>
+  </div>
+</p-dialog>

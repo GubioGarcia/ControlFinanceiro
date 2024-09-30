@@ -2,13 +2,15 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-menu-bar',
   standalone: true,
   imports: [
     MenubarModule,
-    SelectButtonModule
+    SelectButtonModule,
+    FormsModule
   ],
   templateUrl: './menu-bar.component.html',
   styleUrl: './menu-bar.component.css'
@@ -108,16 +110,16 @@ export class MenuBarComponent implements OnInit {
       {
         label: 'Claro',
         icon: 'pi pi-sun',
-        value: 'bootstrap4-light-purple'
+        value: 'bootstrap4-light-blue'
       },
       {
         label: 'Escuro',
         icon: 'pi pi-moon',
-        value: 'bootstrap4-dark-purple'
+        value: 'bootstrap4-dark-blue'
       }
     ]
 
-    this.temaSelecionado = 'bootstrap4-light-purple';
+    this.temaSelecionado = 'bootstrap4-light-blue';
     this.changeTheme(this.temaSelecionado);
   }
 

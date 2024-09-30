@@ -1,1 +1,11 @@
-<p>grupo-view works!</p>
+<app-menu-bar/>
+<h2>Grupo</h2>
+<div *ngIf="grupo">
+  <p><strong>ID:</strong> {{ grupo.id }}</p>
+  <p><strong>Nome:</strong> {{ grupo.nome }}</p>
+  <p><strong>Saldo:</strong> {{ grupo.saldo }}</p>
+  <p><strong>Descrição:</strong> {{ grupo.descricao }}</p>
+</div>
+<div *ngIf="!grupo">
+  <p>Pessoa não encontrada.</p>
+</div>

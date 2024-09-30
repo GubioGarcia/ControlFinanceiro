@@ -1,6 +1,8 @@
 <app-menu-bar/>
-<h2>Seus Grupos</h2>
-<p-button routerLink="/grupo-form" label="Adicionar Grupo" />
+<div class="header">
+  <h2>Seus Grupos</h2>
+  <p-button routerLink="/grupo-form" label="Adicionar Grupo" />
+</div>
 <p-table [value]="grupos" [tableStyle]="{ 'min-width': '50rem' }">
   <ng-template pTemplate="header">
     <tr>
