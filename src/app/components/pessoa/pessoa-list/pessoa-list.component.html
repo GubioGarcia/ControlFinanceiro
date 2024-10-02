@@ -1,4 +1,4 @@
-<app-menu-bar></app-menu-bar>
+<app-menu-bar/>
 <div class="header">
   <h2>Lista de Pessoas</h2>
   <p-button routerLink="/pessoa-form" label="Adicionar Pessoa"></p-button>
@@ -34,4 +34,8 @@
     <p><strong>CPF:</strong> {{ pessoaSelecionada.cpf }}</p>
     <p><strong>Email:</strong> {{ pessoaSelecionada.email }}</p>
   </div>
+  <td>
+    <button pButton type="button" label="Editar" class="p-button-warning p-mr-2 button-spacing"></button>
+    <button pButton type="button" label="Deletar" class="p-button-danger"></button>
+  </td>
 </p-dialog>

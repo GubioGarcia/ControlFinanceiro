@@ -1,0 +1,44 @@
+<app-menu-bar/>
+<div class="header">
+  <h2>Seus Lançamentos</h2>
+  <p-button routerLink="/lancamento-form" label="Adicionar Lançamento" />
+</div>
+<p-table [value]="lancamentos" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Valor</th>
+      <th>Data</th>
+      <th>Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-lancamento>
+    <tr>
+      <td>{{ lancamento.nome }}</td>
+      <td>{{ lancamento.descricao }}</td>
+      <td>{{ lancamento.valor }}</td>
+      <td>{{ lancamento.data }}</td>
+      <td>
+        <button pButton type="button" label="Visualizar" class="p-button-primary button-spacing" (click)="viewLancamento(lancamento)"></button>
+        <button pButton type="button" label="Editar" class="p-button-warning p-mr-2 button-spacing" ></button>
+        <button pButton type="button" label="Deletar" class="p-button-danger" ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- Visualização por Dialog -->
+<p-dialog header="Visualizar Lançamento" [(visible)]="displayDialog" modal="true" [style]="{width: '30vw'}" [closable]="true">
+  <div *ngIf="lancamentoSelecionado">
+    <p><strong>ID:</strong> {{ lancamentoSelecionado.id }}</p>
+    <p><strong>Nome:</strong> {{ lancamentoSelecionado.nome }}</p>
+    <p><strong>Descrição:</strong> {{ lancamentoSelecionado.descricao }}</p>
+    <p><strong>Descrição:</strong> {{ lancamentoSelecionado.valor }}</p>
+    <p><strong>Saldo:</strong> {{ lancamentoSelecionado.data }}</p>
+  </div>
+  <td>
+    <button pButton type="button" label="Editar" class="p-button-warning p-mr-2 button-spacing"></button>
+    <button pButton type="button" label="Deletar" class="p-button-danger"></button>
+  </td>
+</p-dialog>

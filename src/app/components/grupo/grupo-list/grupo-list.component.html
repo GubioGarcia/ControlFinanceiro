@@ -18,8 +18,24 @@
       <td>{{ grupo.descricao }}</td>
       <td>{{ grupo.saldo }}</td>
       <td>
-        <a [routerLink]="['/grupo-view', grupo.id]">Visualizar</a>
+        <button pButton type="button" label="Visualizar" class="p-button-primary button-spacing" (click)="viewGrupo(grupo)"></button>
+        <button pButton type="button" label="Editar" class="p-button-warning p-mr-2 button-spacing" (click)="viewGrupo(grupo)"></button>
+        <button pButton type="button" label="Deletar" class="p-button-danger" (click)="viewGrupo(grupo)"></button>
       </td>
     </tr>
   </ng-template>
 </p-table>
+
+<!-- Visualização por Dialog -->
+<p-dialog header="Visualizar Grupo" [(visible)]="displayDialog" modal="true" [style]="{width: '30vw'}" [closable]="true">
+  <div *ngIf="grupoSelecionado">
+    <p><strong>ID:</strong> {{ grupoSelecionado.id }}</p>
+    <p><strong>Nome:</strong> {{ grupoSelecionado.nome }}</p>
+    <p><strong>Descrição:</strong> {{ grupoSelecionado.descricao }}</p>
+    <p><strong>Saldo:</strong> {{ grupoSelecionado.saldo }}</p>
+  </div>
+  <td>
+    <button pButton type="button" label="Editar" class="p-button-warning p-mr-2 button-spacing"></button>
+    <button pButton type="button" label="Deletar" class="p-button-danger"></button>
+  </td>
+</p-dialog>

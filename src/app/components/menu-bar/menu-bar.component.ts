@@ -68,11 +68,13 @@ export class MenuBarComponent implements OnInit {
           items: [
               {
                   label: 'Listar',
-                  icon: 'pi pi-list'
+                  icon: 'pi pi-list',
+                  routerLink: ['/lancamento-list']
               },
               {
                   label: 'Adicionar',
-                  icon: 'pi pi-plus'
+                  icon: 'pi pi-plus',
+                  routerLink: ['/lancamento-form']
               }
           ]
         },
@@ -82,11 +84,13 @@ export class MenuBarComponent implements OnInit {
           items: [
               {
                   label: 'Listar',
-                  icon: 'pi pi-list'
+                  icon: 'pi pi-list',
+                  routerLink: ['/meta-list']
               },
               {
                   label: 'Adicionar',
-                  icon: 'pi pi-plus'
+                  icon: 'pi pi-plus',
+                  routerLink: ['/meta-form']
               }
           ]
         },

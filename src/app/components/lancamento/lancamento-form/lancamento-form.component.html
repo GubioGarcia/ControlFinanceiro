@@ -1,0 +1,23 @@
+<app-menu-bar/>
+<h2>Adicionar Lançamento</h2>
+<form (ngSubmit)="adicionarLancamento()">
+  <div class="input-container">
+    <p-floatLabel>
+      <input id="nome" type="text" pInputText [(ngModel)]="nome" name="nome" required />
+      <label for="nome">Nome</label>
+    </p-floatLabel>
+    <p-floatLabel>
+      <input id="descricao" type="text" pInputText [(ngModel)]="descricao" name="descricao" required />
+      <label for="descricao">Descricao</label>
+    </p-floatLabel>
+    <p-floatLabel>
+      <input id="valor" type="text" pInputText [(ngModel)]="valor" name="valor" />
+      <label for="valor">Valor</label>
+    </p-floatLabel>
+    <p-floatLabel>
+      <input id="data" type="text" pInputText [(ngModel)]="data" name="data" />
+      <label for="data">Data</label>
+    </p-floatLabel>
+  </div>
+  <button type="submit" pButton label="Adicionar Lançamento"></button>
+</form>

@@ -1,0 +1,19 @@
+<app-menu-bar/>
+<h2>Adicionar Meta</h2>
+<form (ngSubmit)="adicionarMeta()">
+  <div class="input-container">
+    <p-floatLabel>
+      <input id="meta" type="text" pInputText [(ngModel)]="meta" name="meta" required />
+      <label for="meta">Meta</label>
+    </p-floatLabel>
+    <p-floatLabel>
+      <input id="valor" type="text" pInputText [(ngModel)]="valor" name="valor" />
+      <label for="valor">Valor</label>
+    </p-floatLabel>
+    <p-floatLabel>
+      <input id="descricao" type="text" pInputText [(ngModel)]="descricao" name="descricao" required />
+      <label for="descricao">Descricao</label>
+    </p-floatLabel>
+  </div>
+  <button type="submit" pButton label="Adicionar Meta"></button>
+</form>

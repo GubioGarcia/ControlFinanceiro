@@ -1,0 +1,41 @@
+<app-menu-bar/>
+<div class="header">
+  <h2>Suas Metas</h2>
+  <p-button routerLink="/meta-form" label="Adicionar Meta" />
+</div>
+<p-table [value]="metas" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Meta</th>
+      <th>Valor</th>
+      <th>Descrição</th>
+      <th>Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-meta>
+    <tr>
+      <td>{{ meta.meta }}</td>
+      <td>{{ meta.valor }}</td>
+      <td>{{ meta.descricao }}</td>
+      <td>
+        <button pButton type="button" label="Visualizar" class="p-button-primary button-spacing" (click)="viewMeta(meta)"></button>
+        <button pButton type="button" label="Editar" class="p-button-warning p-mr-2 button-spacing"></button>
+        <button pButton type="button" label="Deletar" class="p-button-danger"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- Visualização por Dialog -->
+<p-dialog header="Visualizar Meta" [(visible)]="displayDialog" modal="true" [style]="{width: '30vw'}" [closable]="true">
+  <div *ngIf="metaSelecionada">
+    <p><strong>ID:</strong> {{ metaSelecionada.id }}</p>
+    <p><strong>Meta:</strong> {{ metaSelecionada.meta }}</p>
+    <p><strong>Saldo:</strong> {{ metaSelecionada.valor }}</p>
+    <p><strong>Descrição:</strong> {{ metaSelecionada.descricao }}</p>
+  </div>
+  <td>
+    <button pButton type="button" label="Editar" class="p-button-warning p-mr-2 button-spacing"></button>
+    <button pButton type="button" label="Deletar" class="p-button-danger"></button>
+  </td>
+</p-dialog>

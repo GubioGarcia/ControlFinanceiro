@@ -23,12 +23,16 @@ import { DialogModule } from 'primeng/dialog';
   styleUrl: './pessoa-list.component.css'
 })
 export class PessoaListComponent {
-  pessoas: Pessoa[];
+  pessoas: Pessoa[] = [];
   displayDialog: boolean = false;
   pessoaSelecionada?: Pessoa;
 
-  constructor(private pessoaService: PessoaService) {
-    this.pessoas = this.pessoaService.listarPessoas();
+  constructor(private pessoaService: PessoaService) {}
+
+  ngOnInit() {
+    this.pessoaService.get().subscribe((response: Pessoa[]) => {
+      this.pessoas = response; // atribui a resposta ao array de pessoas
+    });
   }
 
   // Exibe pessoa através de uma dialog
