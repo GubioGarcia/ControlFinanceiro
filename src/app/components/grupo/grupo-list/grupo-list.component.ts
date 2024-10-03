@@ -23,12 +23,16 @@ import { DialogModule } from 'primeng/dialog';
   styleUrl: './grupo-list.component.css'
 })
 export class GrupoListComponent {
-  grupos: Grupo[];
+  grupos: Grupo[] = [];
   displayDialog: boolean = false;
   grupoSelecionado?: Grupo;
 
-  constructor(private grupoService: GrupoService) {
-    this.grupos = this.grupoService.listarGrupo();
+  constructor(private grupoService: GrupoService) {}
+
+  ngOnInt() {
+    this.grupoService.get().subscribe((response: Grupo[]) => {
+      this.grupos = response;
+    });
   }
 
   viewGrupo(grupo: Grupo) {

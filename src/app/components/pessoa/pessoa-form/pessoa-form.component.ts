@@ -6,6 +6,9 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { PessoaListComponent } from '../pessoa-list/pessoa-list.component';
 import { ButtonModule } from 'primeng/button';
 import { MenuBarComponent } from '../../menu-bar/menu-bar.component';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @Component({
   selector: 'pessoa-form',
@@ -15,8 +18,11 @@ import { MenuBarComponent } from '../../menu-bar/menu-bar.component';
     FloatLabelModule,
     PessoaListComponent,
     ButtonModule,
-    MenuBarComponent
+    MenuBarComponent,
+    ToastModule,
+    InputNumberModule
   ],
+  providers: [MessageService],
   templateUrl: './pessoa-form.component.html',
   styleUrl: './pessoa-form.component.css'
 })
@@ -25,11 +31,46 @@ export class PessoaFormComponent {
   cpf: string = '';
   email: string = '';
 
-  constructor(private pessoaService: PessoaService) {}
+  constructor(private pessoaService: PessoaService, private messageService: MessageService) {}
+
+  apenasNumeros(event: any) {
+    const input = event.target.value;
+    event.target.value = input.replace(/[^0-9]/g, '');
+    this.cpf = event.target.value;
+  }
 
   adicionarPessoa() {
+    if (this.cpf.length !== 11) {
+      this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'O CPF deve conter 11 dígitos.' });
+      return;
+    }
+    if (!this.nome || this.nome.trim() === '') {
+      this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'O Nome não pode estar vazio.' });
+      return;
+    }
+    if (!this.email || this.email.trim() === '') {
+      this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'O E-mail não pode estar vazio.' });
+      return;
+    }
+
     const novaPessoa = new Pessoa(this.nome, this.cpf, this.email);
-    this.pessoaService.adicionarPessoa(novaPessoa);
-    alert('Pessoa adicionada com sucesso!');
+
+    this.pessoaService.adicionarPessoa(novaPessoa).subscribe({
+      next: () => {
+        this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Pessoa adicionada com sucesso!'});
+        this.limparFormulario();
+      },
+      error: (err) => {
+        console.error('Erro ao adicionar pessoa', err);
+        const errorMessage = err.error.message || 'Erro ao adicionar pessoa.';
+        this.messageService.add({severity: 'error', summary: 'Erro', detail: errorMessage});
+      }
+    });
+  }
+
+  limparFormulario() {
+    this.nome = '';
+    this.cpf = '';
+    this.email = '';
   }
 }

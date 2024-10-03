@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Pessoa } from '../models/Pessoa';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class PessoaService {
     return this.httpClient.get<Pessoa[]>(this.url);
   }
 
-  adicionarPessoa(pessoa: Pessoa): void {
-    this.pessoas.push(pessoa);
+  adicionarPessoa(pessoa: Pessoa): Observable<Pessoa> {
+    return this.httpClient.post<Pessoa>(this.url, pessoa);
   }
 
   listarPessoas(): Pessoa[] {
@@ -25,6 +26,14 @@ export class PessoaService {
 
   obterPessoa(id: number): Pessoa | undefined {
     return this.pessoas.find(pessoa => pessoa.id === id);
+  }
+
+  atualizarPessoa(id: number, pessoa: Pessoa) {
+    return this.httpClient.put<Pessoa>(this.url, pessoa);
+  }
+
+  deletePessoa(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
 }
 

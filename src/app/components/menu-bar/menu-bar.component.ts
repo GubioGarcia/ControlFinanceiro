@@ -97,16 +97,7 @@ export class MenuBarComponent implements OnInit {
         {
           label: 'Relatórios',
           icon: 'pi pi-chart-bar',
-          items: [
-              {
-                  label: 'Listar',
-                  icon: 'pi pi-list'
-              },
-              {
-                  label: 'Adicionar',
-                  icon: 'pi pi-plus'
-              }
-          ]
+          routerLink: ['/home']
         }
     ];
 

@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Grupo } from '../models/Grupo';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GrupoService {
   private grupos: Grupo[] = [];
+  private url = "http://localhost:8080/api/grupo";
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) {}
+
+  get() {
+    return this.httpClient.get<Grupo[]>(this.url);
+  }
 
   adicionarGrupo(grupo: Grupo): void {
     this.grupos.push(grupo);

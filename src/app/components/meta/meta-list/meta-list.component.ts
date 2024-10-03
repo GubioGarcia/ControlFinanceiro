@@ -23,12 +23,16 @@ import { MetaService } from '../../../services/meta.service';
   styleUrl: './meta-list.component.css'
 })
 export class MetaListComponent {
-  metas: Meta[];
+  metas: Meta[] = [];
   displayDialog: boolean = false;
   metaSelecionada?: Meta;
 
-  constructor(private metaService: MetaService) {
-    this.metas = this.metaService.listarMeta();
+  constructor(private metaService: MetaService) {}
+
+  ngOnInit() {
+    this.metaService.get().subscribe((response: Meta[]) => {
+      this.metas = response;
+    });
   }
 
   viewMeta(meta: Meta) {
