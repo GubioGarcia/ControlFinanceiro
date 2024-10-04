@@ -1,9 +1,0 @@
-.input-container {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 15px;
-}
-
-p-floatLabel {
-  margin-right: 5px;
-}

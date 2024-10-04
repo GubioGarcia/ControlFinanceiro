@@ -1,0 +1,29 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+}
+
+label {
+  margin-right: 5px;
+}
+
+input {
+  margin-right: 15px;
+}
+
+.inputSelect-container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+}
+
+p-dropdown {
+  margin-right: 15px;
+}
