@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Grupo } from '../models/Grupo';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Grupo } from '../models/Grupo';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +16,19 @@ export class GrupoService {
     return this.httpClient.get<Grupo[]>(this.url);
   }
 
-  adicionarGrupo(grupo: Grupo): void {
-    this.grupos.push(grupo);
+  adicionarGrupo(grupo: Grupo): Observable<Grupo> {
+    return this.httpClient.post<Grupo>(this.url, grupo);
   }
 
-  listarGrupo(): Grupo[] {
-    return this.grupos;
+  obterGrupo(id: number): Observable<Grupo> {
+    return this.httpClient.get<Grupo>(`${this.url}/${id}`);
   }
 
-  obterGrupo(id: number): Grupo | undefined {
-    return this.grupos.find(grupo => grupo.id === id);
+  atualizarGrupo(id: number, grupo: Grupo): Observable<Grupo> {
+    return this.httpClient.put<Grupo>(`${this.url}`, grupo);
+  }
+
+  deletarGrupo(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
 }
