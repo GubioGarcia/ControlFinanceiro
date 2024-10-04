@@ -39,7 +39,7 @@ public class GrupoController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(Long id) {
+    public void delete(@PathVariable Long id) {
         this.service.delete(id);
     }
 

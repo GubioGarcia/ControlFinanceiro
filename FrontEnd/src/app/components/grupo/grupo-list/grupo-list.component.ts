@@ -67,6 +67,37 @@ export class GrupoListComponent {
     this.displayDialogEdit = true;
   }
 
+  updateGrupo() {
+    if (this.grupoSelecionado) {
+      if (!this.grupoSelecionado.nome || this.grupoSelecionado.nome.trim() === '') {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'O Nome não pode estar vazio.' });
+        return;
+      }
+      if (!this.grupoSelecionado.descricao || this.grupoSelecionado.descricao.trim() === '') {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'A Descrição não pode estar vazia.' });
+        return;
+      }
+      if (this.saldo < 1 || this.saldo.toString().trim() === '') {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'O Saldo deve ser positivo.' });
+        return;
+      }
+
+      const grupoAtualizado = { ...this.grupoSelecionado! };
+      this.grupoService.atualizarGrupo(grupoAtualizado.id, grupoAtualizado).subscribe({
+        next: (response) => {
+          this.grupos = this.grupos.map(g => g.id === response.id ? response : g);
+          this.displayDialogEdit = false;
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Grupo atualizado com sucesso!' });
+        },
+        error: (err) => {
+          console.error('Erro ao atualizar grupo', err);
+          this.errorMessage = err.error.message || 'Erro ao atualizar o grupo';
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: this.errorMessage });
+        }
+      });
+    }
+  }
+
   deletarGrupo(id: number): void {
     if (confirm('Deseja excluir esse grupo?')) {
       this.grupoService.deletarGrupo(id).subscribe({

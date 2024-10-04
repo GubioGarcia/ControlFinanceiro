@@ -43,6 +43,13 @@ public class GrupoService {
     }
 
     public void delete(Long id) {
-        this.repository.deleteById(id);
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("Grupo não encontrada");
+        }
+        try {
+            this.repository.deleteById(id);
+        } catch (Exception e) {
+            throw new RegraNegocioException("Erro ao tentar excluir o grupo. Verifique se há registros associados.");
+        }
     }
 }
