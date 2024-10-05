@@ -36,11 +36,11 @@
     <p><strong>Descrição:</strong> {{ grupoSelecionado.descricao }}</p>
     <p><strong>Saldo:</strong> {{ grupoSelecionado.saldo }}</p>
     <p><strong>Pessoa:</strong> {{ grupoSelecionado.pessoa.nome }}</p>
+    <td class="p-dialog-footer">
+      <button pButton type="button" label="Editar" class="p-button-warning button-spacing" (click)="editGrupo(grupoSelecionado)" (click)="displayDialogView=false"></button>
+      <button pButton type="button" label="Deletar" class="p-button-danger" (click)="displayDialogView=false" (click)="deletarGrupo(grupoSelecionado.id)"></button>
+    </td>
   </div>
-  <td>
-    <button pButton type="button" label="Editar" class="p-button-warning button-spacing" (click)="displayDialogView=false"></button>
-    <button pButton type="button" label="Deletar" class="p-button-danger" (click)="displayDialogView=false" ></button>
-  </td>
 </p-dialog>
 
 <!-- Edição por Dialog -->
@@ -65,7 +65,6 @@
         <input id="saldo" type="text" pInputText [(ngModel)]="grupoSelecionado.saldo" name="saldo" required
                (input)="apenasNumeros($event)" />
       </div>
-      <br>
       <div class="p-field">
         <p><strong>Pessoa: </strong> {{ grupoSelecionado.pessoa.nome }}</p>
       </div>

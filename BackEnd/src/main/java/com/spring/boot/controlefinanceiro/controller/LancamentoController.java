@@ -47,7 +47,7 @@ public class LancamentoController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(Long id) {
+    public void delete(@PathVariable Long id) {
         this.service.delete(id);
     }
 
@@ -55,6 +55,4 @@ public class LancamentoController {
     public List<Lancamento> filter(@RequestBody LancamentoFilterDTO lancamento) {
         return this.service.filter(lancamento);
     }
-
-
 }

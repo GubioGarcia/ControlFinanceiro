@@ -1,7 +1,7 @@
 <app-menu-bar/>
 <div class="header">
-  <h2>Seus Lançamentos</h2>
-  <p-button routerLink="/lancamento-form" label="Adicionar Lançamento" />
+  <h2>Lançamentos</h2>
+  <p-button routerLink="/lancamento-form" label="Novo Lançamento" />
 </div>
 <p-table [value]="lancamentos" [tableStyle]="{ 'min-width': '50rem' }">
   <ng-template pTemplate="header">
@@ -10,6 +10,9 @@
       <th>Descrição</th>
       <th>Valor</th>
       <th>Data</th>
+      <th>Tipo</th>
+      <th>Categoria</th>
+      <th>Grupo</th>
       <th>Ações</th>
     </tr>
   </ng-template>
@@ -19,26 +22,90 @@
       <td>{{ lancamento.descricao }}</td>
       <td>{{ lancamento.valor }}</td>
       <td>{{ lancamento.data }}</td>
+      <td>{{ lancamento.tipo }}</td>
+      <td>{{ lancamento.categoria }}</td>
+      <td>{{ lancamento.grupo?.nome }}</td>
       <td>
         <button pButton type="button" label="Visualizar" class="p-button-primary button-spacing" (click)="viewLancamento(lancamento)"></button>
-        <button pButton type="button" label="Editar" class="p-button-warning p-mr-2 button-spacing" ></button>
-        <button pButton type="button" label="Deletar" class="p-button-danger" ></button>
+        <button pButton type="button" label="Editar" class="p-button-warning button-spacing" (click)="editLancamento(lancamento)"></button>
+        <button pButton type="button" label="Deletar" class="p-button-danger" (click)="deletarLancamento(lancamento.id)"></button>
       </td>
     </tr>
   </ng-template>
 </p-table>
 
 <!-- Visualização por Dialog -->
-<p-dialog header="Visualizar Lançamento" [(visible)]="displayDialog" modal="true" [style]="{width: '30vw'}" [closable]="true">
+<p-dialog header="Visualizar Lançamento" [(visible)]="displayDialogView" modal="true" [style]="{width: '30vw'}" [closable]="true">
   <div *ngIf="lancamentoSelecionado">
     <p><strong>ID:</strong> {{ lancamentoSelecionado.id }}</p>
     <p><strong>Nome:</strong> {{ lancamentoSelecionado.nome }}</p>
     <p><strong>Descrição:</strong> {{ lancamentoSelecionado.descricao }}</p>
     <p><strong>Descrição:</strong> {{ lancamentoSelecionado.valor }}</p>
     <p><strong>Saldo:</strong> {{ lancamentoSelecionado.data }}</p>
+    <p><strong>Tipo:</strong> {{ lancamentoSelecionado.tipo }}</p>
+    <p><strong>Categoria:</strong> {{ lancamentoSelecionado.categoria }}</p>
+    <p><strong>Grupo:</strong> {{ lancamentoSelecionado.grupo.nome }}</p>
+    <td class="p-dialog-footer">
+      <button pButton type="button" label="Editar" class="p-button-warning p-mr-2 button-spacing" (click)="editLancamento(lancamentoSelecionado)" (click)="displayDialogView=false" ></button>
+      <button pButton type="button" label="Deletar" class="p-button-danger" (click)="displayDialogView=false" (click)="deletarLancamento(lancamentoSelecionado.id)" ></button>
+    </td>
   </div>
-  <td>
-    <button pButton type="button" label="Editar" class="p-button-warning p-mr-2 button-spacing"></button>
-    <button pButton type="button" label="Deletar" class="p-button-danger"></button>
-  </td>
 </p-dialog>
+
+<!-- Edição por Dialog -->
+<p-dialog header="Editar Lançamento" [(visible)]="displayDialogEdit" modal="true" [style]="{width: '40vw', 'min-height': '650px'}" [closable]="true">
+  <form *ngIf="lancamentoSelecionado" (ngSubmit)="updateLancamento()">
+    <div class="p-fluid">
+      <div class="p-field">
+        <p><strong>ID:</strong> {{ lancamentoSelecionado.id }}</p>
+      </div>
+      <div class="p-field">
+        <label for="nome"><strong>Nome: </strong></label>
+        <input id="nome" type="text" pInputText [(ngModel)]="lancamentoSelecionado.nome" name="nome" required />
+      </div>
+      <br>
+      <div class="p-field">
+        <label for="descricao"><strong>Descrição: </strong></label>
+        <input id="descricao" type="text" pInputText [(ngModel)]="lancamentoSelecionado.descricao" name="descricao" required />
+      </div>
+      <br>
+      <div class="p-field">
+        <label for="valor"><strong>Valor: </strong></label>
+        <input id="valor" type="text" pInputText [(ngModel)]="lancamentoSelecionado.valor" name="valor" required
+               (input)="apenasNumeros($event)" />
+      </div>
+      <br>
+      <div class="p-field">
+        <label for="data"><strong>Data: </strong></label>
+        <input id="data" type="text" pInputText [(ngModel)]="lancamentoSelecionado.data" name="data" required />
+      </div>
+      <br>
+      <div class="p-field">
+        <label for="tipo"><strong>Tipo*</strong></label>
+        <p-dropdown id="tipo" [options]="tipos" [(ngModel)]="lancamentoSelecionado.tipo" optionLabel="label"
+                     placeholder="Selecione o Tipo" name="tipo" required (onChange)="lancamentoSelecionado.tipo = $event.value"></p-dropdown>
+      </div>
+      <br>
+      <div class="p-field">
+        <label for="categoria"><strong>Categoria*</strong></label>
+        <p-dropdown id="categoria" [options]="categorias" [(ngModel)]="lancamentoSelecionado.categoria" optionLabel="label"
+                     placeholder="Selecione a Categoria" name="categoria" required (onChange)="lancamentoSelecionado.categoria = $event.value"></p-dropdown>
+      </div>
+      <br>
+      <div class="p-field">
+        <p><strong>Grupo: </strong> {{ lancamentoSelecionado.grupo.nome }}</p>
+      </div>
+      <br>
+      <td class="p-dialog-footer">
+        <button pButton type="submit" label="Salvar" class="p-button-success button-spacing" ></button>
+        <button pButton type="button" label="Cancelar" class="p-button-secondary" (click)="displayDialogEdit=false"></button>
+      </td>
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog header="Erro" [(visible)]="displayErrorDialog" modal="modal" [closable]="true">
+  <p>{{ errorMessage }}</p>
+</p-dialog>
+
+<p-toast></p-toast>

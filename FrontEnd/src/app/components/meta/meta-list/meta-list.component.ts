@@ -102,7 +102,7 @@ export class MetaListComponent {
 
       this.metaService.atualizarMeta(this.metaSelecionada.id, updatedMeta).subscribe({
         next: (response) => {
-          this.metas = this.metas.map(p => p.id === response.id ? response : p);
+          this.metas = this.metas.map(m => m.id === response.id ? response : m);
           this.displayDialogEdit = false;
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Meta atualizada com sucesso!' });
         },
@@ -119,7 +119,7 @@ export class MetaListComponent {
     if (confirm('Deseja excluir essa meta?')) {
       this.metaService.deleteMeta(id).subscribe({
         next: () => {
-          this.metas = this.metas.filter(p => p.id !== id);
+          this.metas = this.metas.filter(m => m.id !== id);
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Meta excluída com sucesso!' });
         },
         error: (err) => {

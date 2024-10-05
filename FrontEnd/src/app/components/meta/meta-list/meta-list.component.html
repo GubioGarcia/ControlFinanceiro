@@ -39,10 +39,10 @@
     <p><strong>Descrição:</strong> {{ metaSelecionada.descricao }}</p>
     <p><strong>Tipo:</strong> {{ metaSelecionada.tipo }}</p>
     <p><strong>Categoria:</strong> {{ metaSelecionada.categoria }}</p>
-    <div class="p-dialog-footer">
-      <button pButton type="button" label="Editar" class="p-button-warning button-spacing" (click)="editMeta(metaSelecionada); displayDialogView=false"></button>
-      <button pButton type="button" label="Deletar" class="p-button-danger" (click)="displayDialogView=false; deletarMeta(metaSelecionada.id)"></button>
-    </div>
+    <td class="p-dialog-footer">
+      <button pButton type="button" label="Editar" class="p-button-warning button-spacing" (click)="editMeta(metaSelecionada)" (click)="displayDialogView=false"></button>
+      <button pButton type="button" label="Deletar" class="p-button-danger" (click)="displayDialogView=false" (click)="deletarMeta(metaSelecionada.id)" ></button>
+    </td>
   </div>
 </p-dialog>
 
@@ -80,6 +80,7 @@
         <p-dropdown id="categoria" [options]="categorias" [(ngModel)]="metaSelecionada.categoria" optionLabel="label"
                      placeholder="Selecione a Categoria" name="categoria" required (onChange)="metaSelecionada.categoria = $event.value"></p-dropdown>
       </div>
+      <br>
       <td class="p-dialog-footer">
         <button pButton type="submit" label="Salvar" class="p-button-success button-spacing" ></button>
         <button pButton type="button" label="Cancelar" class="p-button-secondary" (click)="displayDialogEdit=false"></button>

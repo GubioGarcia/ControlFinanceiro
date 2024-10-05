@@ -55,7 +55,14 @@ public class LancamentoService {
     }
 
     public void delete(Long id) {
-        this.repository.deleteById(id);
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("Lançamento não encontrada");
+        }
+        try {
+            this.repository.deleteById(id);
+        } catch (Exception e) {
+            throw new RegraNegocioException("Erro ao tentar excluir o lançamento. Verifique se há registros associados.");
+        }
     }
 
     public List<Lancamento> filter(LancamentoFilterDTO filterDTO) {

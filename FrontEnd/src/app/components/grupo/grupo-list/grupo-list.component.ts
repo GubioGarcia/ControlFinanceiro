@@ -43,8 +43,7 @@ export class GrupoListComponent {
   router: any;
   errorMessage: string = '';
 
-  constructor(private grupoService: GrupoService, private messageService: MessageService) {
-  }
+  constructor(private grupoService: GrupoService, private messageService: MessageService) {}
 
   ngOnInit() {
     this.grupoService.get().subscribe({

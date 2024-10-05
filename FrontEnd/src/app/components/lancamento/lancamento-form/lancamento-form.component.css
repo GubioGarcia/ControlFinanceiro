@@ -1,9 +1,16 @@
+.formAdd {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
 .input-container {
   display: flex;
   flex-direction: row;
   margin-bottom: 15px;
 }
 
-p-floatLabel {
+label {
   margin-right: 5px;
+  margin-left: 15px;
 }
